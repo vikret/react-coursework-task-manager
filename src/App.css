@@ -72,3 +72,19 @@
   margin-top: 16px;
   font-weight: bold;
 }
+.task-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.task-card {
+  background-color: #f4f4f4;
+  border-left: 5px solid #20232a;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.task-card h2 {
+  margin-top: 0;
+}
