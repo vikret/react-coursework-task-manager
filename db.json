@@ -21,6 +21,24 @@
       "name": "Viktor Stankov",
       "email": "viktor@example.com",
       "password": "123456"
+    },
+    {
+      "name": "viki222222",
+      "email": "viktorstankov8@abv.bg",
+      "password": "1234",
+      "id": "CmLxLxqbRNg"
+    },
+    {
+      "name": "viki222222",
+      "email": "viktorstankov8@abv.bg",
+      "password": "1234",
+      "id": "UPy2AZJS_tQ"
+    },
+    {
+      "name": "1234",
+      "email": "1234@abv.bg",
+      "password": "1234",
+      "id": "jMCSYuYe-rk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

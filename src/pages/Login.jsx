@@ -1,9 +1,12 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
+
+  const navigate = useNavigate()
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -13,7 +16,31 @@ function Login() {
       return
     }
 
-    setMessage(`Logged in as ${email}`)
+    fetch('http://localhost:3001/users')
+      .then((response) => response.json())
+      .then((users) => {
+        const loggedUser = users.find((user) => {
+          return user.email === email && user.password === password
+        })
+
+        if (!loggedUser) {
+          setMessage('Invalid email or password.')
+          return
+        }
+
+        localStorage.setItem('loggedUser', JSON.stringify(loggedUser))
+
+        setMessage(`Logged in as ${loggedUser.name}`)
+
+        setTimeout(() => {
+          navigate('/dashboard')
+          window.location.reload()
+        }, 800)
+      })
+      .catch((error) => {
+        console.error('Error logging in:', error)
+        setMessage('Something went wrong. Please try again.')
+      })
   }
 
   return (

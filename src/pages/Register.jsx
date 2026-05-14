@@ -1,10 +1,13 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Register() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
+
+  const navigate = useNavigate()
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -14,7 +17,35 @@ function Register() {
       return
     }
 
-    setMessage(`Account created for ${name}`)
+    const newUser = {
+      name: name,
+      email: email,
+      password: password
+    }
+
+    fetch('http://localhost:3001/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newUser)
+    })
+      .then((response) => response.json())
+      .then(() => {
+        setMessage('Account created successfully. You can now log in.')
+
+        setName('')
+        setEmail('')
+        setPassword('')
+
+        setTimeout(() => {
+          navigate('/login')
+        }, 1000)
+      })
+      .catch((error) => {
+        console.error('Error creating user:', error)
+        setMessage('Something went wrong. Please try again.')
+      })
   }
 
   return (
