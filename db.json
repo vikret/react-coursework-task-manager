@@ -1,25 +1,18 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "title": "Study React components",
-      "subject": "Web Development",
-      "deadline": "2026-06-10",
-      "status": "In Progress"
-    },
-    {
-      "id": "2",
-      "title": "Prepare project defense",
-      "subject": "Course Work",
-      "deadline": "2026-06-15",
-      "status": "Pending"
-    },
-    {
       "title": "123123123",
       "subject": "213123123",
       "deadline": "1111-11-11",
       "status": "In Progress",
       "id": "Apqux-pTH9M"
+    },
+    {
+      "title": "213123",
+      "subject": "12312313",
+      "deadline": "1111-11-11",
+      "status": "Completed",
+      "id": "kDwXm4atBCM"
     }
   ],
   "users": [

@@ -62,6 +62,19 @@ function Dashboard() {
       })
   }
 
+  function handleDeleteTask(id) {
+    fetch(`http://localhost:3001/tasks/${id}`, {
+      method: 'DELETE'
+    })
+      .then(() => {
+        const updatedTasks = tasks.filter((task) => task.id !== id)
+        setTasks(updatedTasks)
+      })
+      .catch((error) => {
+        console.error('Error deleting task:', error)
+      })
+  }
+
   if (loading) {
     return <p>Loading tasks...</p>
   }
@@ -117,6 +130,13 @@ function Dashboard() {
             <p><strong>Subject:</strong> {task.subject}</p>
             <p><strong>Deadline:</strong> {task.deadline}</p>
             <p><strong>Status:</strong> {task.status}</p>
+
+            <button
+              className="delete-button"
+              onClick={() => handleDeleteTask(task.id)}
+            >
+              Delete
+            </button>
           </div>
         ))}
       </div>
