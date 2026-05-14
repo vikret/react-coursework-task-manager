@@ -1,0 +1,26 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Study React components",
+      "subject": "Web Development",
+      "deadline": "2026-06-10",
+      "status": "In Progress"
+    },
+    {
+      "id": 2,
+      "title": "Prepare project defense",
+      "subject": "Course Work",
+      "deadline": "2026-06-15",
+      "status": "Pending"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Viktor Stankov",
+      "email": "viktor@example.com",
+      "password": "123456"
+    }
+  ]
+}
