@@ -1,16 +1,83 @@
-# React + Vite
+# Student Task Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Student Task Manager is a React coursework project for managing university tasks.  
+The application includes login, register, routing, forms, hooks and REST API requests using json-server.
 
-Currently, two official plugins are available:
+## Main Functionalities
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Home page
+- Login form
+- Register form
+- Simple authentication with localStorage
+- Navigation bar
+- Dashboard page
+- Load tasks from REST API
+- Add new task
+- Edit existing task
+- Delete task
+- Data stored in db.json using json-server
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Vite
+- React Router
+- JavaScript
+- CSS
+- json-server
+- GitHub
 
-## Expanding the ESLint configuration
+## REST API
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The project uses json-server as a mock backend.
+
+Main API endpoints:
+
+```text
+GET    /tasks
+POST   /tasks
+PUT    /tasks/:id
+DELETE /tasks/:id
+
+GET    /users
+POST   /users
+How to Run the Project
+
+First install the dependencies:
+
+npm install
+
+Start the REST API server:
+
+npm run server
+
+Open a second terminal and start the React application:
+
+npm run dev
+
+Then open:
+
+http://localhost:5173/
+Test User
+
+You can register a new user from the Register page.
+
+Example user from db.json:
+
+Email: viktor@example.com
+Password: 123456
+Project Structure
+src
+├── components
+│   └── Navbar.jsx
+├── pages
+│   ├── Home.jsx
+│   ├── Login.jsx
+│   ├── Register.jsx
+│   └── Dashboard.jsx
+├── App.jsx
+├── App.css
+└── main.jsx
+Author
+
+Viktor Stankov
