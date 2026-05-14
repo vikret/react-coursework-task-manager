@@ -8,6 +8,7 @@ function Dashboard() {
   const [subject, setSubject] = useState('')
   const [deadline, setDeadline] = useState('')
   const [status, setStatus] = useState('Pending')
+  const [editingTaskId, setEditingTaskId] = useState(null)
 
   useEffect(() => {
     fetchTasks()
@@ -26,7 +27,15 @@ function Dashboard() {
       })
   }
 
-  function handleAddTask(event) {
+  function resetForm() {
+    setTitle('')
+    setSubject('')
+    setDeadline('')
+    setStatus('Pending')
+    setEditingTaskId(null)
+  }
+
+  function handleSubmitTask(event) {
     event.preventDefault()
 
     if (title === '' || subject === '' || deadline === '') {
@@ -34,32 +43,65 @@ function Dashboard() {
       return
     }
 
-    const newTask = {
+    const taskData = {
       title: title,
       subject: subject,
       deadline: deadline,
       status: status
     }
 
-    fetch('http://localhost:3001/tasks', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newTask)
-    })
-      .then((response) => response.json())
-      .then((createdTask) => {
-        setTasks([...tasks, createdTask])
+    if (editingTaskId === null) {
+      fetch('http://localhost:3001/tasks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(taskData)
+      })
+        .then((response) => response.json())
+        .then((createdTask) => {
+          setTasks([...tasks, createdTask])
+          resetForm()
+        })
+        .catch((error) => {
+          console.error('Error adding task:', error)
+        })
+    } else {
+      fetch(`http://localhost:3001/tasks/${editingTaskId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: editingTaskId,
+          ...taskData
+        })
+      })
+        .then((response) => response.json())
+        .then((updatedTask) => {
+          const updatedTasks = tasks.map((task) => {
+            if (task.id === editingTaskId) {
+              return updatedTask
+            }
 
-        setTitle('')
-        setSubject('')
-        setDeadline('')
-        setStatus('Pending')
-      })
-      .catch((error) => {
-        console.error('Error adding task:', error)
-      })
+            return task
+          })
+
+          setTasks(updatedTasks)
+          resetForm()
+        })
+        .catch((error) => {
+          console.error('Error updating task:', error)
+        })
+    }
+  }
+
+  function handleEditTask(task) {
+    setTitle(task.title)
+    setSubject(task.subject)
+    setDeadline(task.deadline)
+    setStatus(task.status)
+    setEditingTaskId(task.id)
   }
 
   function handleDeleteTask(id) {
@@ -69,6 +111,10 @@ function Dashboard() {
       .then(() => {
         const updatedTasks = tasks.filter((task) => task.id !== id)
         setTasks(updatedTasks)
+
+        if (editingTaskId === id) {
+          resetForm()
+        }
       })
       .catch((error) => {
         console.error('Error deleting task:', error)
@@ -84,8 +130,8 @@ function Dashboard() {
       <h1>Dashboard</h1>
       <p>Here are your university tasks loaded from the REST API.</p>
 
-      <form className="form-card task-form" onSubmit={handleAddTask}>
-        <h2>Add New Task</h2>
+      <form className="form-card task-form" onSubmit={handleSubmitTask}>
+        <h2>{editingTaskId === null ? 'Add New Task' : 'Edit Task'}</h2>
 
         <label>Title</label>
         <input
@@ -120,7 +166,15 @@ function Dashboard() {
           <option value="Completed">Completed</option>
         </select>
 
-        <button type="submit">Add Task</button>
+        <button type="submit">
+          {editingTaskId === null ? 'Add Task' : 'Save Changes'}
+        </button>
+
+        {editingTaskId !== null && (
+          <button type="button" className="cancel-button" onClick={resetForm}>
+            Cancel Edit
+          </button>
+        )}
       </form>
 
       <div className="task-list">
@@ -131,12 +185,21 @@ function Dashboard() {
             <p><strong>Deadline:</strong> {task.deadline}</p>
             <p><strong>Status:</strong> {task.status}</p>
 
-            <button
-              className="delete-button"
-              onClick={() => handleDeleteTask(task.id)}
-            >
-              Delete
-            </button>
+            <div className="task-actions">
+              <button
+                className="edit-button"
+                onClick={() => handleEditTask(task)}
+              >
+                Edit
+              </button>
+
+              <button
+                className="delete-button"
+                onClick={() => handleDeleteTask(task.id)}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         ))}
       </div>

@@ -114,8 +114,27 @@ body {
   margin-top: 0;
 }
 
-.delete-button {
+.task-actions {
+  display: flex;
+  gap: 10px;
   margin-top: 8px;
+}
+
+.edit-button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #2d6cdf;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: #1f55b5;
+}
+
+.delete-button {
   padding: 8px 12px;
   border: none;
   border-radius: 4px;
@@ -127,4 +146,12 @@ body {
 
 .delete-button:hover {
   background-color: #8a0018;
+}
+
+.cancel-button {
+  background-color: #555 !important;
+}
+
+.cancel-button:hover {
+  background-color: #444 !important;
 }
