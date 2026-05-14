@@ -29,3 +29,46 @@
 .page-container {
   padding: 32px;
 }
+.form-page {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #f4f4f4;
+  padding: 24px;
+  border-radius: 8px;
+}
+
+.form-card label {
+  font-weight: bold;
+}
+
+.form-card input {
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.form-card button {
+  margin-top: 8px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #20232a;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form-card button:hover {
+  background-color: #333842;
+}
+
+.message {
+  margin-top: 16px;
+  font-weight: bold;
+}
