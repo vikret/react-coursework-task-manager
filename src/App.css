@@ -88,3 +88,14 @@
 .task-card h2 {
   margin-top: 0;
 }
+.task-form {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  max-width: 500px;
+}
+
+.form-card select {
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
